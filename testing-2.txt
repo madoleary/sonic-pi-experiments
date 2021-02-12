@@ -1,0 +1,51 @@
+# Welcome to Sonic Pi v2.10
+
+live_loop :over_static do
+  with_fx :reverb do
+    sample :ambi_choir, rate: 0.1
+    sample :ambi_choir, rate: 0.5
+    sample :ambi_choir, rate: 0.3
+  end
+
+  sample :ambi_drone
+  sample :ambi_glass_rub, amp: 0.2
+  sample :loop_amen, amp: 0.05, beat_stretch: 1
+
+  2.times do
+    use_synth :fm
+    play :C3, decay: 1, sustain_level: 2, sustain: 2, release: 2
+    sleep 0.5
+    play :As3, amp: 2
+    sleep 0.5
+    play :G3, amp: 1.5, release: 1.5
+    sleep 0.5
+    play :Cs3
+    sleep 0.5
+    play :C3
+    play :G3
+    play :C4
+
+    use_synth :sine
+    play :C1, decay: 1, sustain_level: 2, sustain: 2, release: 2
+  end
+
+  1.times do
+    use_synth :fm
+    play :C3, decay: 1, sustain_level: 2, sustain: 2, release: 2
+    sleep 0.5
+    play :As3, amp: 2
+    sleep 0.5
+    play :G3, amp: 1.5, release: 1.5
+    sleep 0.5
+    play :Cs3
+    sleep 0.5
+    play :C3
+    play :G3
+    play :C4
+
+    use_synth :sine
+    play :C2, decay: 1, sustain_level: 2, sustain: 2, release: 2
+  end
+
+  sleep 1
+end
