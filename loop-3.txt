@@ -1,0 +1,23 @@
+# Welcome to Sonic Pi v2.10
+
+use_synth :sine
+
+use_random_seed 40
+
+loop do
+  in_thread do
+    loop do
+      play_pattern_timed chord(:D2, :minor7), 0.25, pan: rrand(-1, 1), release: 0.08
+      play_pattern_timed chord(:Cs4, :minor7), 0.25, pan: rrand(-1, 1), release: 0.05
+      play_pattern_timed chord(:Gs3, :minor7), 0.25, pan: rrand(-1, 1), release: 0.05
+      play_pattern_timed chord(:Fs2, :minor), 0.25, pan: rrand(-1, 1), release: 0.05
+    end
+  end
+
+  loop do
+    play 50, release: 5, cutoff: rrand(10, 120)
+    sample :perc_snap , rate: 0.5, cutoff: rrand(60, 120), amp: 0.5
+    sample :drum_cymbal_closed, rate: 2, vol: rrand(0.3, 0.7)
+    sleep 0.25
+  end
+end
