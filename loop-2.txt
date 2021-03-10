@@ -1,0 +1,39 @@
+# Welcome to Sonic Pi v2.10
+
+with_fx :reverb, mix: 0.5 do
+  loop do
+    with_fx :reverb do
+      in_thread do
+        loop do
+          s = synth [:bnoise, :cnoise, :gnoise].choose, amp: rrand(0.5, 1.5), attack: rrand(0, 4), sustain: rrand(0, 2), release: rrand(1, 3), cutoff_slide: rrand(0, 3), cutoff: rrand(60, 80), pan: rrand(-1, 1), pan_slide: 1, amp: rrand(0.5, 1)
+          control s, pan: rrand(-1, 1), cutoff: rrand(60, 115)
+          sleep rrand(2, 3)
+          r = [0.5, 1.0/3, 3.0/5].choose
+          8.times do
+            sample :ambi_choir, rate: r, pan: rrand(-1, 1)
+            sleep 0.5
+          end
+        end
+      end
+    end
+
+    with_fx :reverb do
+      in_thread do
+        loop do
+          sample :perc_bell, rate: (rrand -1, 1), amp: 0.3
+          sleep rrand(0, 2)
+        end
+      end
+    end
+
+    with_fx :wobble, phase: 2 do |w|
+      with_fx :echo, mix: 0.4 do
+        loop do
+          sample :drum_heavy_kick
+          sample :bass_hit_d, rate: 0.4, amp: 2
+          sleep 1
+        end
+      end
+    end
+  end
+end
